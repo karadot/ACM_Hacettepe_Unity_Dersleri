@@ -33,8 +33,7 @@ public class PlayerMovement : MonoBehaviour {
         float z = Input.GetAxis ("Vertical");
         motion = transform.right * x + transform.forward * z;
         motion *= (speed * Time.deltaTime);
-
-        isGrounded = Physics.CheckSphere (transform.position, groundDistance, groundLayers, QueryTriggerInteraction.Ignore);
+        isGrounded = Physics.CheckSphere (transform.position, groundDistance, groundLayers);
         if (isGrounded && verticalMotion.y < 0) {
             verticalMotion.y = -2f;
         }
@@ -64,6 +63,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void OnDrawGizmos () {
+        Gizmos.color = isGrounded?Color.red : Color.green;
         Gizmos.DrawSphere (transform.position, groundDistance);
     }
 
