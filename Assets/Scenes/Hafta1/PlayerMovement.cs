@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     CharacterController controller;
 
     [SerializeField]
-    bool isGrounded = false, useGravity;
+    bool isGrounded = false, useGravity = true;
 
     [SerializeField]
     LayerMask groundLayers;
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
         float z = Input.GetAxis ("Vertical");
         motion = transform.right * x + transform.forward * z;
         motion *= (speed * Time.deltaTime);
+
         isGrounded = Physics.CheckSphere (transform.position, groundDistance, groundLayers);
         if (isGrounded && verticalMotion.y < 0) {
             verticalMotion.y = -2f;
