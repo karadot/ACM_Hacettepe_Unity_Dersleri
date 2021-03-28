@@ -17,7 +17,11 @@ public class PlayerMovement : MonoBehaviour {
 
     CharacterController controller;
 
-    bool isGrounded = false;
+    [SerializeField]
+    bool isGrounded = false, useGravity = true;
+
+    [SerializeField]
+    LayerMask groundLayers;
 
     private void Start () {
         controller = GetComponent<CharacterController> ();
@@ -30,11 +34,12 @@ public class PlayerMovement : MonoBehaviour {
         motion = transform.right * x + transform.forward * z;
         motion *= (speed * Time.deltaTime);
 
-        isGrounded = Physics.CheckSphere (transform.position, groundDistance);
+        isGrounded = Physics.CheckSphere (transform.position, groundDistance, groundLayers);
         if (isGrounded && verticalMotion.y < 0) {
             verticalMotion.y = -2f;
         }
-        verticalMotion.y += Time.deltaTime * gravity;
+        if (useGravity)
+            verticalMotion.y += Time.deltaTime * gravity;
 
         if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
             verticalMotion.y = jumpVelocityY;
@@ -45,7 +50,22 @@ public class PlayerMovement : MonoBehaviour {
         controller.Move (verticalMotion * Time.fixedDeltaTime);
     }
 
+    public void AddVerticalVelocity (float y) {
+        verticalMotion.y += y * Time.fixedDeltaTime;
+    }
+
+    public void SetVerticalVelocity (float y) {
+        verticalMotion.y = y;
+    }
+
+    public void UseGravity (bool g) {
+        useGravity = g;
+        verticalMotion.y = 0;
+    }
+
     private void OnDrawGizmos () {
+        Gizmos.color = isGrounded?Color.red : Color.green;
         Gizmos.DrawSphere (transform.position, groundDistance);
     }
+
 }
