@@ -281,7 +281,7 @@ MonoBehaviour:
   useGravity: 1
   groundLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
 --- !u!143 &1003580873
 CharacterController:
   m_ObjectHideFlags: 0
