@@ -45,6 +45,11 @@ public class PlayerMovement : MonoBehaviour {
             verticalMotion.y = jumpVelocityY;
         }
     }
+
+    public void DoJump (float jumpHeight) {
+        verticalMotion.y = Mathf.Sqrt (jumpHeight * -2 * gravity);
+    }
+
     private void FixedUpdate () {
         controller.Move (motion);
         controller.Move (verticalMotion * Time.fixedDeltaTime);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperPlatform : MonoBehaviour {
+public class HoverPlatform : MonoBehaviour {
 
     [SerializeField]
     float jumpForce = 5f;
