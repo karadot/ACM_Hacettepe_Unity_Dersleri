@@ -5,13 +5,15 @@ using UnityEngine;
 [RequireComponent (typeof (CharacterController))]
 public class PlayerMovement : MonoBehaviour {
     [SerializeField]
-    float speed = 5f, height = 2f, gravity = -9.81f;
+    float speed = 5f, height = 2f, gravity = -9.81f, drag = 3f;
 
     [SerializeField]
     float groundDistance = .1f;
 
     [SerializeField]
     Vector3 motion, verticalMotion;
+    [SerializeField]
+    Vector3 externalMotion = Vector3.zero;
 
     float jumpVelocityY;
 
@@ -37,9 +39,14 @@ public class PlayerMovement : MonoBehaviour {
         isGrounded = Physics.CheckSphere (transform.position, groundDistance, groundLayers);
         if (isGrounded && verticalMotion.y < 0) {
             verticalMotion.y = -2f;
+            if (externalMotion != Vector3.zero)
+                externalMotion = Vector3.zero;
+
         }
-        if (useGravity)
+
+        if (useGravity) {
             verticalMotion.y += Time.deltaTime * gravity;
+        }
 
         if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
             verticalMotion.y = jumpVelocityY;
@@ -47,11 +54,21 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void DoJump (float jumpHeight) {
-        verticalMotion.y = Mathf.Sqrt (jumpHeight * -2 * gravity);
+        float target = Mathf.Sqrt (jumpHeight * (-2.0f) * gravity);
+        verticalMotion.y = float.IsNaN (target) ? 3 : target;
     }
 
     private void FixedUpdate () {
         controller.Move (motion);
+
+        if (externalMotion != Vector3.zero) {
+            controller.Move (externalMotion * Time.fixedDeltaTime);
+            externalMotion.x -= drag * Time.fixedDeltaTime * Mathf.Sign (externalMotion.x);
+            externalMotion.z -= drag * Time.fixedDeltaTime * Mathf.Sign (externalMotion.z);
+            externalMotion.x = Mathf.Abs (externalMotion.x) < 1f?0 : externalMotion.x;
+            externalMotion.z = Mathf.Abs (externalMotion.z) < 1f?0 : externalMotion.z;
+        }
+
         controller.Move (verticalMotion * Time.fixedDeltaTime);
     }
 
@@ -63,6 +80,12 @@ public class PlayerMovement : MonoBehaviour {
         verticalMotion.y = y;
     }
 
+    public void SetExternalMotion (Vector3 extMotion) {
+        externalMotion.z = extMotion.z;
+        externalMotion.x = extMotion.x;
+        DoJump (extMotion.y);
+    }
+
     public void UseGravity (bool g) {
         useGravity = g;
         verticalMotion.y = 0;
@@ -71,6 +94,8 @@ public class PlayerMovement : MonoBehaviour {
     private void OnDrawGizmos () {
         Gizmos.color = isGrounded?Color.red : Color.green;
         Gizmos.DrawSphere (transform.position, groundDistance);
+
+        Gizmos.DrawRay (transform.position, externalMotion);
     }
 
 }

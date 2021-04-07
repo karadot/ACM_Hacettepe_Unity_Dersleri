@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2587172046401635356}
   - component: {fileID: 2587172046401635357}
   - component: {fileID: 5015627890198791789}
-  m_Layer: 0
-  m_Name: Cube
+  m_Layer: 9
+  m_Name: Jumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2587172046401635359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: 0}
+  m_LocalPosition: {x: 0, y: 2.04, z: 0}
   m_LocalScale: {x: 0.8, y: 3, z: 0.8}
   m_Children: []
   m_Father: {fileID: 5248244156575663956}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88c2bf3cae134145b7c161d2ee27deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 6.72
+  jumpHeight: 10
 --- !u!1 &5248244156575663912
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5248244156575663915}
   - component: {fileID: 5248244156575663914}
   - component: {fileID: 5248244156575663913}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: JumperPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

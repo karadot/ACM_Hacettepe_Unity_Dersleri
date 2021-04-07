@@ -274,9 +274,11 @@ MonoBehaviour:
   speed: 10
   height: 3
   gravity: -19.62
+  drag: 0.3
   groundDistance: 0.1
   motion: {x: 0, y: 0, z: 0}
   verticalMotion: {x: 0, y: 0, z: 0}
+  externalMotion: {x: 0, y: 0, z: 0}
   isGrounded: 0
   useGravity: 1
   groundLayers:

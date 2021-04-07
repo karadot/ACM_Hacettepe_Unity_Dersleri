@@ -11,7 +11,8 @@ public class JumperPlatform : MonoBehaviour {
         PlayerMovement controller = other.GetComponent<PlayerMovement> ();
 
         if (controller != null) {
-            controller.DoJump (jumpHeight);
+            //controller.DoJump (jumpHeight);
+            controller.SetExternalMotion (transform.up * jumpHeight);
         }
     }
 
