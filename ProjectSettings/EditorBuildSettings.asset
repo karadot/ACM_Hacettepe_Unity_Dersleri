@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Hafta4/AnaMenu/Hafta4_AnaMenu.unity
+    guid: 7ed0af48d2f433d499615c818bf87ffc
+  - enabled: 1
+    path: Assets/Scenes/Hafta3/Hafta3.unity
+    guid: f72ddc6c826a8b14287a74e163b635e9
+  - enabled: 1
+    path: Assets/Scenes/Hafta4/Sahne1/Hafta4_Sahne1.unity
+    guid: 5d25e7ca3ed0b444793c898800c14e77
   m_configObjects: {}

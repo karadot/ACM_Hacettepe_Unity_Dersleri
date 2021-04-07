@@ -9,9 +9,8 @@ public class JumperPlatform : MonoBehaviour {
 
     private void OnTriggerEnter (Collider other) {
         PlayerMovement controller = other.GetComponent<PlayerMovement> ();
-        Debug.Log ("Jump");
+
         if (controller != null) {
-            Debug.Log ("Jump");
             controller.DoJump (jumpHeight);
         }
     }
