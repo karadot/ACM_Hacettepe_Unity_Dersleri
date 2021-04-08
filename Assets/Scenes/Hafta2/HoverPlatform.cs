@@ -40,14 +40,16 @@ public class HoverPlatform : MonoBehaviour {
         PlayerMovement controller = other.GetComponent<PlayerMovement> ();
 
         if (controller != null) {
-            float distance = other.transform.position.y - hoverCenter.y;
-            if (Mathf.Abs (distance) < hoverAralik) {
-                distance = Mathf.Sign (distance);
-                controller.AddVerticalVelocity (-distance * jumpForce);
-            } else {
-                controller.SetVerticalVelocity (-distance * jumpForce);
-            }
+            Vector3 hoverMotion = hoverCenter - other.transform.position;
+            hoverMotion.Normalize ();
+            float distance = Vector3.Distance (other.transform.position, hoverCenter);
+            Debug.DrawRay (other.transform.position, hoverMotion);
 
+            if (distance > hoverAralik) {
+                controller.SetExternalMotion (hoverMotion * jumpForce, false);
+            } else {
+                controller.AddExternalMotion (hoverMotion * jumpForce * 5);
+            }
         }
     }
 

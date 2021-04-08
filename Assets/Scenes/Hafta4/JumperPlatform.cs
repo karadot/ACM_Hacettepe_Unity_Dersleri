@@ -12,7 +12,7 @@ public class JumperPlatform : MonoBehaviour {
 
         if (controller != null) {
             //controller.DoJump (jumpHeight);
-            controller.SetExternalMotion (transform.up * jumpHeight);
+            controller.SetExternalMotion (transform.up * jumpHeight, true);
         }
     }
 

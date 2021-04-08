@@ -80,10 +80,21 @@ public class PlayerMovement : MonoBehaviour {
         verticalMotion.y = y;
     }
 
-    public void SetExternalMotion (Vector3 extMotion) {
+    public void SetExternalMotion (Vector3 extMotion, bool jump) {
         externalMotion.z = extMotion.z;
         externalMotion.x = extMotion.x;
-        DoJump (extMotion.y);
+        if (jump) {
+            DoJump (extMotion.y);
+        } else {
+            SetVerticalVelocity (extMotion.y);
+        }
+
+    }
+
+    public void AddExternalMotion (Vector3 extMotion) {
+        externalMotion.z += extMotion.z * Time.deltaTime;
+        externalMotion.x += extMotion.x * Time.deltaTime;
+        verticalMotion.y += extMotion.y * Time.deltaTime;
     }
 
     public void UseGravity (bool g) {

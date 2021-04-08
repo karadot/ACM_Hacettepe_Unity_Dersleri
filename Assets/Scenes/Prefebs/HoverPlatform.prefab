@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4560082195816054786}
   - component: {fileID: 4560082195816054910}
   - component: {fileID: 4560082195816054909}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HoverPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4560082195816054787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.44, y: 0.35, z: 2.89}
-  m_LocalScale: {x: 3, y: 0.1, z: 3}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -106,8 +106,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 75.00948, z: 1}
-  m_Center: {x: 0, y: 37.50474, z: 0}
+  m_Size: {x: 1, y: 10.000001, z: 1}
+  m_Center: {x: 0, y: 4.9999995, z: 0}
 --- !u!114 &4560082195816054909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 1
-  hoverHeight: 4
-  hoverAralik: 3
+  hoverHeight: 8
+  hoverAralik: 0.5
