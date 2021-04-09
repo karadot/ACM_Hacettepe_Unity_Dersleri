@@ -3748,6 +3748,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1684004275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5908962558842661632, guid: 97ca05fcd43552844855ec8d2a7661eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1021696152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1691799962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3835,6 +3841,11 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1929895935}
+    - target: {fileID: 8090011292002936320, guid: 59e31cba0f93b024888e921edf303b7f,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1684004275}
     - target: {fileID: 8090011292002936321, guid: 59e31cba0f93b024888e921edf303b7f,
         type: 3}
       propertyPath: coinText

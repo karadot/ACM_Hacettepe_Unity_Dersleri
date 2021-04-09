@@ -45,6 +45,7 @@ MonoBehaviour:
   bullet: {fileID: 3269462041084525259, guid: c2e0669e0abfbfa4e851c80a32d2e847, type: 3}
   bulletForce: 50
   gunEnd: {fileID: 1783479685}
+  CanShot: 1
 --- !u!1 &5908962557310320751
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +222,8 @@ GameObject:
   - component: {fileID: 5908962558842661634}
   - component: {fileID: 5908962558842661637}
   - component: {fileID: 1003580873}
+  - component: {fileID: 1853431075}
+  - component: {fileID: 1853431076}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -274,7 +277,6 @@ MonoBehaviour:
   speed: 10
   height: 3
   gravity: -19.62
-  drag: 0.3
   groundDistance: 0.1
   motion: {x: 0, y: 0, z: 0}
   verticalMotion: {x: 0, y: 0, z: 0}
@@ -302,6 +304,39 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &1853431075
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908962558842661632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 538ecdca79c8d2f42a83647964fec296, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1853431076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908962558842661632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e785e2eaba48f945ba22050eecd4457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 2091857580}
+  animator: {fileID: 0}
 --- !u!1 &5908962558953816463
 GameObject:
   m_ObjectHideFlags: 0
