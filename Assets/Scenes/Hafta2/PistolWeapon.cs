@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Verdiğimiz oyun objesini oluşturan ve belirttiğimiz konum ve yönde, belirttiğimiz kuvvetle fırlatan script
-public class Weapon : MonoBehaviour {
+public class PistolWeapon : Weapon {
     //Fırlatmak istediğimiz mermi prefabı
     [SerializeField]
     GameObject bullet;
@@ -11,15 +11,15 @@ public class Weapon : MonoBehaviour {
     [SerializeField]
     float bulletForce = 50f;
 
+    [SerializeField]
+    ParticleSystem muzzleFlashSystem;
+
     //Merminin yaratılacağı konum ve rotasyon bilgisini referans alacağı obje
     [SerializeField]
     Transform gunEnd;
 
-    //Ateş edip edemeyeceği durumunu tuttuğumuz değişken
-    public bool CanShot = true;
-
     //Belirtilen bullet objesini yaratıp rigidbody bileşenine erişerek kuvvet ekleyen kod
-    public void Shoot () {
+    public override void Shoot () {
         /*
         Instantiate komutu tam olarak obje yaratma işlemini gerçekleştiriyor. 
         isterseniz gördüğünüz gibi, yaratma sonucunda oluşan objeyi GameObject tipinde bir değişkende tutabiliyorsunuz. 
@@ -47,5 +47,7 @@ public class Weapon : MonoBehaviour {
         Ayrıca dokümanlarda daha detaylı bilgi de bulabilirsiniz.
         */
         BulletRigidbody.AddForce (newBullet.transform.forward * bulletForce, ForceMode.Impulse);
+
+        muzzleFlashSystem.Play ();
     }
 }
