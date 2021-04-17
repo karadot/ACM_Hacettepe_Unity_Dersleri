@@ -62,12 +62,23 @@ public class LevelController : MonoBehaviour {
         door.SetActive (false);
         uiController = GetComponent<UIController> ();
         uiController.UpdateCoinText (_CoinCount);
+        StartCoroutine (StartGame ());
     }
 
-    private void Update () {
-        //Tamamlanmadığı sürece zamanı güncellemeye devam ediyoruz
-        if (!isCompleted)
+    IEnumerator StartGame () {
+
+        uiController.ActivateCountDownTimer (true);
+        for (int i = 3; i >= 0; i--) {
+            uiController.SetCountDownTimerText (i.ToString ());
+            yield return new WaitForSeconds (1f);
+        }
+        uiController.SetCountDownTimerText ("Başla");
+        yield return new WaitForSeconds (1f);
+        uiController.ActivateCountDownTimer (false);
+        while (!isCompleted) {
             GameTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     //oyun sonu objesini-kapıyı aktif hale getiriyoruz.
@@ -77,19 +88,12 @@ public class LevelController : MonoBehaviour {
 
     //oyun tamamlandığında 
     public void Finished () {
-
         isCompleted = true;
         //Playerprefs üzerinden veri okumak için sahne adını elde ediyoruz
         string sceneName = SceneManager.GetActiveScene ().name;
         //daha sonra sahne adının sonuna _score yazısını ekliyoruz. 
         sceneName += "_score";
-        //Sahne için daha önce score kaydedildiyse bunu okuyoruz, eğer kayıt yoksa Mathf.Infinity ile çok büyük-sonsuza denk bir sayı vermesini belirtiyoruz
-        float currScore = PlayerPrefs.GetFloat (sceneName, Mathf.Infinity);
-        //eğer kaydedilmiş süreden daha kısa sürede oyun tamamlandıysa, yeni yüksek skor elde yapılmış demektir
-        bool isNewHighScore = gameTime < currScore;
-        //yeni yüksek skorumuzu kaydediyoruz.
-        if (isNewHighScore || currScore != Mathf.Infinity)
-            PlayerPrefs.SetFloat (sceneName, gameTime);
+        bool isNewHighScore = ScoreManager.SaveScore (sceneName, gameTime);
         //oyun sonu panelimizi açması için uiController fonksiyonunu çağırıyoruz
         uiController.FinishUI (isNewHighScore);
         //player objesini deaktif hale getiriyoruz.

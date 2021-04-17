@@ -7,7 +7,7 @@ public class UIController : MonoBehaviour {
 
     //Coin ve Time değerlerini yazmak için kullanacağımız değişkenler
     [SerializeField]
-    Text coinText, timeText;
+    Text coinText, timeText, countDownTimer;
 
     //Oyun içi ve oyun sonu durumlarda aktif-deaktif edeceğimiz objeler
     [SerializeField]
@@ -17,6 +17,13 @@ public class UIController : MonoBehaviour {
     private void Awake () {
         InGamePanel.SetActive (true);
         FinishPanel.SetActive (false);
+        ClearAllTexts ();
+    }
+
+    void ClearAllTexts () {
+        coinText.text = "";
+        timeText.text = "";
+        countDownTimer.text = "";
     }
     //Coin metnini güncellemek için int tipinde değer alan fonksiyon
     public void UpdateCoinText (int altinMiktari) {
@@ -38,6 +45,14 @@ public class UIController : MonoBehaviour {
         FinishPanel.SetActive (true);
         //Ayrıca, yeni bir yüksek skor durumunda, ekstra bir obje gösteriyoruz.
         HighScoreText.SetActive (isNewHighScore);
+    }
+
+    public void ActivateCountDownTimer (bool isActive) {
+        countDownTimer.gameObject.SetActive (isActive);
+    }
+
+    public void SetCountDownTimerText (string message) {
+        countDownTimer.text = message;
     }
 
 }
