@@ -5020,8 +5020,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanShot: 1
   laser: {fileID: 16504359}
-  impact: {fileID: 7463984365605589159}
+  impact: {fileID: 7463984365605589152}
   time: 0.3
+  force: 10
   mainCamera: {fileID: 5908962557310320737}
 --- !u!1 &5908962557310320751
 GameObject:
@@ -5577,9 +5578,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 050bec7b8fa3ff44ea49b6eb6df98bd3, type: 3}
---- !u!1 &7463984365605589159 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7463984365517156743, guid: 050bec7b8fa3ff44ea49b6eb6df98bd3,
+--- !u!198 &7463984365605589152 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7463984365517156736, guid: 050bec7b8fa3ff44ea49b6eb6df98bd3,
     type: 3}
   m_PrefabInstance: {fileID: 457548064}
   m_PrefabAsset: {fileID: 0}
