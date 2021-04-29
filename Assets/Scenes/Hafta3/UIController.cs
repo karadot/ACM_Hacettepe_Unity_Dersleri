@@ -25,13 +25,13 @@ public class UIController : MonoBehaviour {
         timeText.text = "";
         countDownTimer.text = "";
     }
-    //Coin metnini güncellemek için int tipinde değer alan fonksiyon
-    public void UpdateCoinText (int altinMiktari) {
-        coinText.text = "Toplanacak Altın:" + altinMiktari;
+    //Kalan hedef metnini güncellemek için string ve int tipinde değer alan fonksiyon
+    public void UpdateTargetText (string message, int count) {
+        coinText.text = message + ":" + count;
     }
     //Coin metnini güncellemek için string tipinde değer alan değişken. Dikkat ederseniz bir önceki fonksiyon ile aynı isme sahip
     //Bu sayede aynı isimdeki fonksiyonları farklı değişkenlerle kullanabiliyoruz.
-    public void UpdateCoinText (string message) {
+    public void UpdateTargetText (string message) {
         coinText.text = message;
     }
     //Time metnini güncellemek için kullandığımız değişken

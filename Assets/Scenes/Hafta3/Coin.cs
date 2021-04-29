@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour {
 
         }*/
         if (other.CompareTag ("Player")) {
-            LevelController.Instance.CoinCount--;
+            LevelController.Instance.TargetCount--;
             Destroy (gameObject);
         }
     }

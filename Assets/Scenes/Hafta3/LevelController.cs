@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
 
-    //Sahnede toplanması gereken coin sayisi
+    //Sahnede tamamlanması gereken hedef sayısı
     [SerializeField]
-    int _CoinCount = 4;
+    int _remainingTargets = 4;
     //Oyun zamanını tutacağımız değişken
     float gameTime = 0;
 
     //oyun sonunda aktif olacak obje
     [SerializeField]
     GameObject door;
-    //altın toplama sonucunda gösterilecek metin
+    //farklı durumlarda gösterilecek mesaj metinleri
     [SerializeField]
-    string completedMessage = "Kapı Açıldı";
+    string completedMessage = "Kapı Açıldı", targetMessage = "Toplanacak Altın Sayısı";
 
     //karakter kontrollerine erişip kapatıp açabilmek için karakter objemizi tuttuğumuz değişken
     [SerializeField]
@@ -25,17 +25,17 @@ public class LevelController : MonoBehaviour {
     //Coin toplama tamamlandı mı tamamlanmadı mı durumunu tutuyoruz
     bool isCompleted = false;
 
-    //Coin sayısını properties üzerinden değiştirerek, duruma göre farklı işlemler gerçekleştirebiliyoruz.
-    public int CoinCount {
-        get => _CoinCount;
+    //Hedef sayısını properties üzerinden değiştirerek, duruma göre farklı işlemler gerçekleştirebiliyoruz.
+    public int TargetCount {
+        get => _remainingTargets;
         set {
             if (value <= 0) {
-                _CoinCount = 0;
+                _remainingTargets = 0;
                 ActivateDoor ();
-                uiController.UpdateCoinText (completedMessage);
+                uiController.UpdateTargetText (completedMessage);
             } else {
-                _CoinCount = value;
-                uiController.UpdateCoinText (_CoinCount);
+                _remainingTargets = value;
+                uiController.UpdateTargetText (targetMessage, _remainingTargets);
             }
         }
     }
@@ -58,15 +58,30 @@ public class LevelController : MonoBehaviour {
         if (Instance != null) {
             Destroy (this);
         }
+
         Instance = this;
+
+        door = GameObject.FindWithTag ("Finish");
+        if (door == null) {
+            Debug.LogWarning ("Can't find door");
+            return;
+        }
+        player = GameObject.FindWithTag ("Player");
+        if (player == null) {
+            Debug.LogWarning ("Can't find player");
+            return;
+        }
+
         door.SetActive (false);
+
         uiController = GetComponent<UIController> ();
-        uiController.UpdateCoinText (_CoinCount);
+
         StartCoroutine (StartGame ());
+
     }
 
     IEnumerator StartGame () {
-
+        ActivatePlayerController (false);
         uiController.ActivateCountDownTimer (true);
         for (int i = 3; i >= 0; i--) {
             uiController.SetCountDownTimerText (i.ToString ());
@@ -75,8 +90,10 @@ public class LevelController : MonoBehaviour {
         uiController.SetCountDownTimerText ("Başla");
         yield return new WaitForSeconds (1f);
         uiController.ActivateCountDownTimer (false);
+        uiController.UpdateTargetText (targetMessage, _remainingTargets);
+        ActivatePlayerController (true);
         while (!isCompleted) {
-            GameTime += Time.deltaTime;
+            //GameTime += Time.deltaTime;
             yield return null;
         }
     }
@@ -96,10 +113,24 @@ public class LevelController : MonoBehaviour {
         bool isNewHighScore = ScoreManager.SaveScore (sceneName, gameTime);
         //oyun sonu panelimizi açması için uiController fonksiyonunu çağırıyoruz
         uiController.FinishUI (isNewHighScore);
-        //player objesini deaktif hale getiriyoruz.
-        player.SetActive (false);
+        //player objesini kontrollerini deaktif hale getiriyoruz.
+        ActivatePlayerController (false);
         //fareyi görünür hale getirip kilidini kaldırıyoruz.
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    void ActivatePlayerController (bool isActive) {
+        player.GetComponent<PlayerMovement> ().enabled = isActive;
+        player.GetComponent<PlayerLook> ().enabled = isActive;
+        player.GetComponent<WeaponManager> ().enabled = isActive;
+    }
+
+    public void ReloadCurrentScene () {
+        SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+    }
+
+    public void LoadNextScene () {
+        SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
     }
 }
