@@ -6,7 +6,8 @@ public class Collectibles : MonoBehaviour {
 
     [SerializeField]
     UnityEvent onCollected;
-    private void OnTriggerExit (Collider other) {
+
+    private void OnTriggerEnter (Collider other) {
         if (other.CompareTag ("Player")) {
             onCollected?.Invoke ();
             Destroy (gameObject);

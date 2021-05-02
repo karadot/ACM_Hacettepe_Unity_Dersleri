@@ -58,7 +58,6 @@ public class LevelController : MonoBehaviour {
         if (Instance != null) {
             Destroy (this);
         }
-
         Instance = this;
 
         door = GameObject.FindWithTag ("Finish");
@@ -93,7 +92,7 @@ public class LevelController : MonoBehaviour {
         uiController.UpdateTargetText (targetMessage, _remainingTargets);
         ActivatePlayerController (true);
         while (!isCompleted) {
-            //GameTime += Time.deltaTime;
+            GameTime += Time.deltaTime;
             yield return null;
         }
     }
@@ -131,6 +130,9 @@ public class LevelController : MonoBehaviour {
     }
 
     public void LoadNextScene () {
-        SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+        int nextSceneIndex = SceneManager.GetActiveScene ().buildIndex + 1;
+        if (nextSceneIndex > SceneManager.sceneCountInBuildSettings - 1)
+            nextSceneIndex = 0;
+        SceneManager.LoadScene (nextSceneIndex);
     }
 }

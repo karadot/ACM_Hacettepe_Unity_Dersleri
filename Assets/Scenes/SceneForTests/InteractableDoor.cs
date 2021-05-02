@@ -9,16 +9,19 @@ public class InteractableDoor : Interactables {
 
     bool isOpened = false;
 
+    [SerializeField]
+    UnityEngine.Events.UnityEvent onDoorOpened;
+
     private void Start () {
         animator = GetComponent<Animator> ();
         source = GetComponent<AudioSource> ();
     }
     public override void Interact () {
 
-        if (!CanInteract)
-            return;
         base.Interact ();
         isOpened = !isOpened;
+        if (isOpened)
+            onDoorOpened?.Invoke ();
         animator.SetBool ("Open", isOpened);
         source.Play ();
     }

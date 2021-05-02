@@ -584,6 +584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 1070387196533242, guid: dc7c84106cc461e4f8dac748879dbe72, type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
     - target: {fileID: 4778183659321382, guid: dc7c84106cc461e4f8dac748879dbe72, type: 3}
       propertyPath: m_RootOrder
       value: 2
